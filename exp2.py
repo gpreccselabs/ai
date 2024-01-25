@@ -1,35 +1,29 @@
-from collections import defaultdict
-class Solution:
+jug1 = int(input("Enter the capacity of the first jug: "))
+jug2 = int(input("Enter the capacity of the second jug: "))
+target = int(input("Enter the target volume: "))
 
-   def __init__(self, head_name):
-      self.family = defaultdict(list)
-      self.head = head_name
-      self.dead = set()
+def water_jug_problem(jug1, jug2, target):
+    if target % gcd(jug1, jug2) != 0 or target > jug1 :
+        print("Target volume cannot be reached.")
+        return
+    j1, j2 = 0, 0
+    print("(",j1,",",j2,")")
+    while j1 != target and j2 != target:
+        if j1 == 0:
+            j1 = jug1
+            print("(",j1,",",j2,")")
+        elif j2 == jug2:
+            j2 = 0
+            print("(",j1,",",j2,")")
+        else:
+            pour = min(j1, jug2 - j2)
+            j1 -= pour
+            j2 += pour
+            print("(",j1,",",j2,")")
+    print("(",j1,",",0,")")
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 
-   def birth(self, p_name, c_name):
-      self.family[p_name].append(c_name)
-
-   def death(self, name):
-      self.dead.add(name)
-
-   def inheritance(self):
-      self.ans = []
-      self.depth_search(self.head)
-      return self.ans
-
-   def depth_search(self, current):
-      if current not in self.dead:
-         self.ans.append(current)
-      for child in self.family[current]:
-         self.depth_search(child)
-
-ob = Solution('Paul')
-ob.birth('Paul', 'Zach')
-ob.birth('Paul', 'Jesse')
-ob.birth('Jesse', 'Ursula')
-ob.birth('Jesse', 'Ryan')
-ob.birth('Jesse', 'Thea')
-ob.death('Paul')
-print(ob.inheritance())
-ob.death('Zach')
-print(ob.inheritance())
+water_jug_problem(max(jug1,jug2),min(jug1,jug2), target)
