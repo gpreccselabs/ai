@@ -1,2 +1,2 @@
 likes(ram,mango).
-is(apple,red).
+tastes(apple,sweet).
