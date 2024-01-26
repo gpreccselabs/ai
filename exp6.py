@@ -40,8 +40,6 @@ class Graph:
                     parents[m] = n
 
         return None
-
-# Example usage:
 adjacency_list = {
     'A': [('B', 1), ('C', 3), ('D', 7)],
     'B': [('D', 5)],
